@@ -1,7 +1,6 @@
 import os
 import glob
 
-from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -47,26 +46,42 @@ def checking_all_files_in_dir(dir_name):
             'В директории присутсвуют не все файлы. Обрабатывать пока не будем'
             )
         return False
-    """
-    quantity_file_in_dir = len(os.listdir(dir_name))
-    # Создадим пустой массив для храниения номеров параметров
-    num_file_array = []
-    # Просмотрим все файлы и занесем номера в массив
-    for file_name in os.listdir(dir_name):
-        file_in_dir = os.path.join(dir_name, file_name)
-        if os.path.isfile(file_in_dir):
-            # print(file_name)
-            pass
-    # print(quantity_file_tim)
-    # expansion расширение для файла
-    # return os.listdir(dir_name)
-    return num_file_array
-    """
 
 
-"""
-def read_files_txt_scalar(file_csv_name):
-    # Построчное чтение данных из файла csv с разбивкой на поля.
+def read_files_tim(dir_name, file_tim_name):
+    """Чтение данных из файла *.tim."""
+    file_way = f'{dir_name}\\{file_tim_name}'
+    # f = open(file_way, 'r')
+    try:
+        file_open_name = open(file_way, 'r')
+        # data_byte = file_open_name.read(4)
+        # print(f'Первые 4 байта {data_byte} файла')
+        with open(file_way, 'r') as fh:
+            content = fh.read()
+        print("Print the full content of the binary file:")
+        print(content)
+    except FileExistsError:
+        print('Ошибка открытия файла.')
+    finally:
+        file_open_name.close()
+    # return result
+
+
+def read_files_ofs(file_ofs_name):
+    """Чтение данных из файла *.ofs."""
+    pass
+
+
+def read_files_dat(file_dat_name):
+    """Чтение данных из файла *.dat."""
+    pass
+
+
+def read_files_crc(file_crc_name):
+    """Чтение данных из файла *.crc."""
+    pass
+
+    """
     result = []
     file_dir_name = FILE_BIN_DIR_NAME
     # for count in list_file_txt_scalar:
@@ -86,7 +101,7 @@ def read_files_txt_scalar(file_csv_name):
     finally:
         f.close()
     return result
-"""
+    """
 
 
 def main():
@@ -94,6 +109,8 @@ def main():
     print(f'Рабочая директория - {work_dir}')
     if checking_all_files_in_dir(FILE_BIN_DIR_NAME) is True:
         print('В директории все файлы. Работаем дальше!')
+    # file_name = 'Par00.tim'
+    print(read_files_tim(FILE_BIN_DIR_NAME, 'Par00.tim'))
 
 
 if __name__ == '__main__':

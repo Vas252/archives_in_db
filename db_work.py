@@ -113,7 +113,6 @@ def table_data_exists(cur, table_name):
         return True
     else:
         print(f'Таблица {table_name} не заполнена.')
-        # test_str = '''COPY catalog FROM 'D:\\Work\\kks_4.csv' DELIMITER ',' CSV HEADER;'''
         cur.execute('''COPY catalog FROM 'D:\\Work\\kks_4.csv' DELIMITER ',' CSV HEADER;''')
         return False
 
